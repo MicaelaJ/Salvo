@@ -1,12 +1,7 @@
 package com.codeoftheweb.salvo;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Entity
 //atributos

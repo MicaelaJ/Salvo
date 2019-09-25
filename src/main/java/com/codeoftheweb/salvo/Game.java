@@ -1,13 +1,7 @@
 package com.codeoftheweb.salvo;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
+import java.util.*;
 
 @Entity
 public class Game {
@@ -17,9 +11,10 @@ public class Game {
     private long id;
     private Date creationDate;
 
-    public Game (){
+    public Game() {
     }
-    public Game(Date creationDate){
+
+    public Game(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -31,7 +26,12 @@ public class Game {
         return creationDate;
     }
 
-    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
-    Set<GamePlayer> gamePlayers;
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    private Set<GamePlayer> gamePlayers;
 
+    public Set<GamePlayer> getGamePlayers() {
+        return gamePlayers;
+    }
 }
+
+

@@ -4,11 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.repository.NoRepositoryBean;
-
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @SpringBootApplication
 public class SalvoApplication {
@@ -37,25 +34,28 @@ public class SalvoApplication {
 			Game g4 = new Game(Date.from(date.toInstant().plusSeconds(7200)));
 			Game g5 = new Game(Date.from(date.toInstant().plusSeconds(7200)));
 			Game g6 = new Game(Date.from(date.toInstant().plusSeconds(7200)));
+			Game g7 = new Game(Date.from(date.toInstant().plusSeconds(7200)));
+			Game g8 = new Game(Date.from(date.toInstant().plusSeconds(7200)));
 
-			gameRepository.saveAll(Arrays.asList(g1,g2,g3,g4,g5,g6));
+			gameRepository.saveAll(Arrays.asList(g1,g2,g3,g4,g5,g6,g7,g8));
 
-			GamePlayer gp1 = new GamePlayer(g1, p1);
-			GamePlayer gp2 = new GamePlayer(g1, p2);
-			GamePlayer gp3 = new GamePlayer(g2, p1);
-			GamePlayer gp4 = new GamePlayer(g2, p2);
-			GamePlayer gp5 = new GamePlayer(g3, p2);
-			GamePlayer gp6 = new GamePlayer(g3, p4);
-			GamePlayer gp7 = new GamePlayer(g4, p2);
-			GamePlayer gp8 = new GamePlayer(g4, p1);
-			GamePlayer gp9 = new GamePlayer(g5, p4);
-			GamePlayer gp10 = new GamePlayer(g5, p1);
-			GamePlayer gp11 = new GamePlayer(g6, p3);
-			GamePlayer gp12 = new GamePlayer(g5, p4);
-			GamePlayer gp13 = new GamePlayer(g5, p3);
-			GamePlayer gp14 = new GamePlayer(g5, p4);
+			GamePlayer gp1 = new GamePlayer(date, g1, p1);
+			GamePlayer gp2 = new GamePlayer(date, g1, p2);
+			GamePlayer gp3 = new GamePlayer(date, g2, p1);
+			GamePlayer gp4 = new GamePlayer(date, g2, p2);
+			GamePlayer gp5 = new GamePlayer(date, g3, p2);
+			GamePlayer gp6 = new GamePlayer(date, g3, p4);
+			GamePlayer gp7 = new GamePlayer(date, g4, p2);
+			GamePlayer gp8 = new GamePlayer(date, g4, p1);
+			GamePlayer gp9 = new GamePlayer(date, g5, p4);
+			GamePlayer gp10 = new GamePlayer(date, g5, p1);
+			GamePlayer gp11 = new GamePlayer(date, g6, p3);
+			GamePlayer gp12 = new GamePlayer(date, g7, p4);
+			GamePlayer gp13 = new GamePlayer(date, g8, p3);
+			GamePlayer gp14 = new GamePlayer(date, g8, p4);
 
-			gamePlayerRepository.saveAll(Arrays.asList(gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gp12, gp13, gp14));
+
+			gamePlayerRepository.saveAll(Arrays.asList(gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gp12,gp13,gp14));
 		};
 	}
 }

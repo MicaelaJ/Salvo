@@ -1,31 +1,60 @@
 package com.codeoftheweb.salvo;
-
-import javafx.beans.binding.ObjectExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.persistence.Id;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
+import static java.util.stream.Collectors.toList;
 
-@RequestMapping("/api")
 @RestController
+@RequestMapping("/api")
+
 public class SalvoController {
 
     @Autowired
     private GameRepository gameRepository;
 
+    //lista
     @RequestMapping("/games")
-    public List<Long> getAllGames(){
+    public List<Map<String, Object>> getAllGames() {
         return gameRepository.findAll()
-                             .stream()
-                             .map(game -> game.getId())
-                             .collect(Collectors.toList());
+                .stream()
+                .map(game -> makeGameDTO(game))
+                .collect(toList());
     }
-    //ver
-    Map<String, javax.persistence.Id> created = new HashMap<>();
 
-}
+    public List<Map<String, Object>> getAllGamePlayers(Set<GamePlayer> gamePlayers) {
+        return gamePlayers
+                .stream()
+                .map(gamePlayer -> makeGamePlayerDTO(gamePlayer))
+                .collect(toList());
+
+    }
+        private Map<String, Object> makeGameDTO (Game game){
+            Map<String, Object> dto = new LinkedHashMap<String, Object>();
+            dto.put("id", game.getId());
+            dto.put("created", game.getCreationDate());
+            dto.put("gamePlayers", getAllGamePlayers(game.getGamePlayers()));
+
+            return dto;
+        }
+
+        private Map<String, Object> makeGamePlayerDTO (GamePlayer gamePlayer){
+            Map<String, Object> dto = new LinkedHashMap<String, Object>();
+            dto.put("id", gamePlayer.getId());
+            dto.put("player", makePlayerDTO(gamePlayer.getPlayer()));
+
+            return dto;
+        }
+
+        private Map<String, Object> makePlayerDTO (Player player){
+            Map<String, Object> dto = new LinkedHashMap<String, Object>();
+            dto.put("id", player.getId());
+            dto.put("email", player.getUserName());
+
+            return dto;
+        }
+    }
+
