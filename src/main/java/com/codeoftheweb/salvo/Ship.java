@@ -1,43 +1,44 @@
 package com.codeoftheweb.salvo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
 public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    private String type;
-    @JsonIgnore
+    //2
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "gamePlayer_id")
-
     private GamePlayer gamePlayer;
+
+    //4 para usar una list se hace element collection
     @ElementCollection
-    @Column(name = "Locations")
+    @Column(name="shipLocations")
+    private Set<String> shipLocations = new HashSet<>();
 
-    private ArrayList locations = new ArrayList();
+    //1
+    private String type;
 
-    public Ship() {
-    }
+    public Ship() {}
 
-    public Ship(String type, GamePlayer gamePlayer, List<String> locations) {
-        this.type = type;
+    public Ship(GamePlayer gamePlayer, String type, Set<String> shipLocations) {
         this.gamePlayer = gamePlayer;
-        this.locations = (ArrayList) locations;
+        this.shipLocations = shipLocations;
+        this.type = type;
     }
 
     public long getId() {
-        return this.id;
+        return id;
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public void setType(String type) {
@@ -45,18 +46,22 @@ public class Ship {
     }
 
     public GamePlayer getGamePlayer() {
-        return this.gamePlayer;
+        return gamePlayer;
     }
 
-    void setGamePlayer(GamePlayer gamePlayer) {
+    public void setGamePlayer(GamePlayer gamePlayer) {
         this.gamePlayer = gamePlayer;
     }
-
-    public ArrayList getLocations() {
-        return this.locations;
+    //ship locations relacion envevida
+    public Set<String> getShipLocations() {
+        return shipLocations;
     }
 
-    public void setLocations(List<String> Locations) {
-        this.locations = (ArrayList) Locations;
+    public void setShipLocations(Set<String> shipLocations) {
+        this.shipLocations = shipLocations;
+    }
+
+    public GamePlayer getShipPlayer() {
+        return this.getGamePlayer();
     }
 }

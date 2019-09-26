@@ -1,14 +1,8 @@
 package com.codeoftheweb.salvo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
-
 
 @Entity
 public class GamePlayer {
@@ -25,7 +19,7 @@ public class GamePlayer {
         this.joinDate = joinDate;
     }
 
-    public long getId() {
+    long getId() {
         return id;
     }
 
@@ -37,7 +31,7 @@ public class GamePlayer {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    public Player getPlayer() {
+    Player getPlayer() {
         return player;
     }
 
@@ -49,27 +43,22 @@ public class GamePlayer {
         return game;
     }
 
-    public GamePlayer(Date joinDate, Game game, Player player) {
+    GamePlayer(Date joinDate, Game game, Player player) {
         this.joinDate = joinDate;
         this.game = game;
         this.player = player;
     }
 
+    //3
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    private List<Ship> ships = new ArrayList();
+    private Set<Ship> ships;
 
-    public List<Ship> getShips() {
+    public Set<Ship> getShips() {
         return this.ships;
     }
 
-    public void setShips(List<Ship> ships) {
+    public void setShips(Set<Ship> ships) {
         this.ships = ships;
-    }
-
-    public void addShip(Ship ship) {
-        this.ships.add(ship);
-        ship.setGamePlayer(this);
     }
 }
 
