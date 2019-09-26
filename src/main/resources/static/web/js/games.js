@@ -5,7 +5,7 @@ $(function() {
 function updateView(data) {
     console.log(data);
     let htmlList = data.map(function (games) {
-        return  '<li>' + games.created + ' ' + games.gamePlayers.map(function(p) { return p.player.email}).join(',')  +'</li>';
+        return  '<li>' + games.created + ' ' + games.gamePlayers.map(function(p) { return p.player.userName}).join(',')  +'</li>';
     }).join('');
   document.getElementById("game-list").innerHTML = htmlList;
 }
