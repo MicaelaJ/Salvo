@@ -20,13 +20,13 @@ public class Score {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    private float score;
+    private double score;
     private Date finishDate;
 
     //CONSTRUCTOR
     public Score(){}
 
-    public Score(float score, Date finishDate, Game game, Player player){
+    public Score(Game game, Player player, double score, Date finishDate){
         this.game = game;
         this.player = player;
         this.score = score;
@@ -36,7 +36,7 @@ public class Score {
     //GETTERS
     public long getId(){ return id;}
 
-    public float getScore(){return score;}
+    public double getScore(){return score;}
 
     public Date getFinishDate(){return finishDate;}
 
