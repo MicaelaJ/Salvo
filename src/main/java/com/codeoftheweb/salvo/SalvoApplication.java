@@ -1,6 +1,6 @@
 package com.codeoftheweb.salvo;
 
-import com.codeoftheweb.salvo.Methods.*;
+import com.codeoftheweb.salvo.Models.*;
 import com.codeoftheweb.salvo.Repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

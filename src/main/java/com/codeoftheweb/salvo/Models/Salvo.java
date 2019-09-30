@@ -1,4 +1,4 @@
-package com.codeoftheweb.salvo.Methods;
+package com.codeoftheweb.salvo.Models;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -46,7 +46,6 @@ public class Salvo {
         return this.getGamePlayer();}
 
         //SETTERS
-
     public void setTurn(int turn) {
         this.turn = turn;
     }

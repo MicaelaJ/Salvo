@@ -1,5 +1,5 @@
 package com.codeoftheweb.salvo.Controller;
-import com.codeoftheweb.salvo.Methods.*;
+import com.codeoftheweb.salvo.Models.*;
 import com.codeoftheweb.salvo.Repositories.GamePlayerRepository;
 import com.codeoftheweb.salvo.Repositories.GameRepository;
 import com.codeoftheweb.salvo.Repositories.SalvoRepository;

@@ -1,4 +1,4 @@
-package com.codeoftheweb.salvo.Methods;
+package com.codeoftheweb.salvo.Models;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
