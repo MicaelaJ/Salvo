@@ -25,7 +25,6 @@ public class Ship {
     private Set<String> shipLocations = new HashSet<>();
 
     //CONSTRUCTOR
-
     public Ship() {}
 
     public Ship(GamePlayer gamePlayer, String type, Set<String> shipLocations) {
@@ -35,7 +34,6 @@ public class Ship {
     }
 
     //GETTERS
-
     public long getId() {
         return id;
     }
@@ -49,8 +47,10 @@ public class Ship {
     public GamePlayer getShipPlayer() {
         return this.getGamePlayer();}
 
-    //SETTERS
+    public Set<String> getShipLocations() {
+        return shipLocations;}
 
+    //SETTERS
     public void setType(String type) {
         this.type = type;
     }
@@ -58,9 +58,6 @@ public class Ship {
     public void setGamePlayer(GamePlayer gamePlayer) {
         this.gamePlayer = gamePlayer;
     }
-
-    public Set<String> getShipLocations() {
-        return shipLocations;}
 
     public void setShipLocations(Set<String> shipLocations) {
         this.shipLocations = shipLocations;

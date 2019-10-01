@@ -2,22 +2,39 @@ $(function() {
     loadData()
 });
 
-function updateView(data) {
-    console.log(data);
-    let htmlList = data.map(function (games) {
-        return  '<li>' + games.created + ' ' + games.gamePlayers.map(function(p) { return p.player.userName}).join(',')  +'</li>';
-    }).join('');
+function updateViewGames(data) {
+  var htmlList = data.map(function (game) {
+      return  '<li class="list-group-item">' + new Date(game.created).toLocaleString() + ' ' + game.gamePlayers.map(function(element) { return element.player.email}).join(', ')  +'</li>';
+  }).join('');
   document.getElementById("game-list").innerHTML = htmlList;
 }
 
-// load and display JSON sent by server for /players
+function updateViewLBoard(data) {
+  var htmlList = data.map(function (score) {
+      return  '<tr><td>' + score.email + '</td>'
+              + '<td>' + score.score.total + '</td>'
+              + '<td>' + score.score.won + '</td>'
+              + '<td>' + score.score.lost + '</td>'
+              + '<td>' + score.score.tied + '</td></tr>';
+  }).join('');
+  document.getElementById("leader-list").innerHTML = htmlList;
+}
 
 function loadData() {
-    $.get("/api/games")
-        .done(function(data) {
-          updateView(data);
-        })
-        .fail(function( jqXHR, textStatus ) {
-          alert( "Failed: " + textStatus );
-        });
+  $.get("/api/games")
+    .done(function(data) {
+      updateViewGames(data);
+    })
+    .fail(function( jqXHR, textStatus ) {
+      alert( "Failed: " + textStatus );
+    });
+  
+  $.get("/api/leaderBoard")
+    .done(function(data) {
+        console.log(data)
+      updateViewLBoard(data);
+    })
+    .fail(function( jqXHR, textStatus ) {
+      alert( "Failed: " + textStatus );
+    });
 }

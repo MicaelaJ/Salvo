@@ -30,7 +30,8 @@ public class GamePlayer {
     private Set<Salvo> salvos;
 
     //CONSTRUCTOR
-    public GamePlayer() {}
+    public GamePlayer() {
+    }
 
     public GamePlayer(Date joinDate, Game game, Player player) {
         this.joinDate = joinDate;
@@ -47,7 +48,9 @@ public class GamePlayer {
         return player;
     }
 
-    public Date getJoinDate() { return joinDate;}
+    public Date getJoinDate() {
+        return joinDate;
+    }
 
     public Game getGame() {
         return game;
@@ -57,10 +60,15 @@ public class GamePlayer {
         return this.ships;
     }
 
-    public Set<Salvo> getSalvos()
-    { return this.salvos; }
-}
+    public Set<Salvo> getSalvos() {
+        return this.salvos;
+    }
 
+    //SETTERS
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+}
 
 
 

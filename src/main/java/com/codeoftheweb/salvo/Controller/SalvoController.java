@@ -1,15 +1,11 @@
 package com.codeoftheweb.salvo.Controller;
 import com.codeoftheweb.salvo.Models.*;
-import com.codeoftheweb.salvo.Repositories.GamePlayerRepository;
-import com.codeoftheweb.salvo.Repositories.GameRepository;
-import com.codeoftheweb.salvo.Repositories.SalvoRepository;
-import com.codeoftheweb.salvo.Repositories.ShipRepository;
+import com.codeoftheweb.salvo.Repositories.*;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
@@ -31,6 +27,12 @@ public class SalvoController {
     @Autowired
     private SalvoRepository salvoRepository;
 
+    @Autowired
+    private ScoreRepository scoreRepository;
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
     //lista /api/games___________________________________________________________________
     @RequestMapping("/games")
     public List<Map<String, Object>> getAllGames() {
@@ -46,6 +48,7 @@ public class SalvoController {
         dto.put("id", game.getId());
         dto.put("created", game.getCreationDate());
         dto.put("gamePlayers", getAllGamePlayers(game.getGamePlayers()));
+        dto.put("scores", getAllScore(game.getScores()));
         return dto;
     }
 
@@ -69,7 +72,7 @@ public class SalvoController {
     public Map<String, Object> getPlayerDTO(Player player) {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", player.getId());
-        dto.put("userName", player.getUserName());
+        dto.put("email", player.getUserName());
         return dto;
     }
 
@@ -126,5 +129,48 @@ public class SalvoController {
         dto.put("locations", salvo.getSalvoLocations());
         return dto;
     }
+
+    //SCORE
+
+    @RequestMapping("/leaderBoard")
+    public List<Map<String, Object>> getLeaderBoard(){
+        return playerRepository.findAll()
+                .stream()
+                .map(player -> playerLeaderBoardDto(player))
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, Object> playerLeaderBoardDto(Player player) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("id", player.getId());
+        dto.put("email", player.getUserName());
+        dto.put("score", this.getPlayerScoreDTO(player));
+        return dto;
+    }
+
+    public Map<String, Object> getPlayerScoreDTO(Player player) {
+    Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("total", player.getTotalScore());
+        dto.put("won", player.getWinScore());
+        dto.put("lost", player.getLostScore());
+        dto.put("tied", player.getTiedScore());
+        return dto;
+    }
+
+    public List<Map<String, Object>> getAllScore(Set<Score> scores) {
+        return scores
+                .stream()
+                .map(score -> scoreDTO(score))
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, Object> scoreDTO(Score score) {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("player", score.getPlayer().getUserName());
+        dto.put("score", score.getScore());
+        dto.put("finishDate", score.getFinishDate());
+        return dto;
+    }
+
 }
 

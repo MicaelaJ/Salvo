@@ -45,7 +45,11 @@ public class Salvo {
     public GamePlayer getSalvoPlayer() {
         return this.getGamePlayer();}
 
-        //SETTERS
+    public Set<String> getSalvoLocations() {
+        return salvoLocations;
+    }
+
+    //SETTERS
     public void setTurn(int turn) {
         this.turn = turn;
     }
@@ -57,7 +61,5 @@ public class Salvo {
     public void SetSalvoLocations(Set<String> salvoLocations) {
          this.salvoLocations = salvoLocations;}
 
-    public Set<String> getSalvoLocations() {
-        return salvoLocations;
-    }
+
 }

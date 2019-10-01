@@ -13,26 +13,35 @@ public class Game {
     private long id;
 
     private Date creationDate;
+    private double score;
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     private Set<GamePlayer> gamePlayers;
 
-    //CONSTRUCTOR
-    public Game() {}
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    private Set<Score> scores;
 
-    public Game(Date creationDate) {
-        this.creationDate = creationDate;}
+    //CONSTRUCTOR
+    public Game() {
+    }
+
+    public Game(Date creationDate) { this.creationDate = creationDate; }
 
     //GETTERS
-    public Date getCreationDate() {
-        return creationDate;}
+    public long getId() { return id; }
 
-    public long getId() {
-        return id;}
+    public Date getCreationDate() { return creationDate; }
+
+    public Double getScore() { return score; }
 
     //SETTERS
     public Set<GamePlayer> getGamePlayers() {
-        return gamePlayers;}
+        return gamePlayers;
+    }
+
+    public void setScores() { this.scores = scores; }
+
+    public Set<Score> getScores() { return scores; }
 }
 
 
