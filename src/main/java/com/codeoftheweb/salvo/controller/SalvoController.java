@@ -1,16 +1,17 @@
-package com.codeoftheweb.salvo.Controller;
-import com.codeoftheweb.salvo.Models.*;
-import com.codeoftheweb.salvo.Repositories.*;
-import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
+package com.codeoftheweb.salvo.controller;
+
+import com.codeoftheweb.salvo.models.*;
+import com.codeoftheweb.salvo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") //para cambiar la raiz de la ruta
 
 public class SalvoController {
 
@@ -79,14 +80,14 @@ public class SalvoController {
     //game_view___________________________________________________________________
     //dto.put para salvos
     @RequestMapping("/game_view/{gamePlayer_Id}")
-     public Map<String, Object> getGameView (@PathVariable Long gamePlayer_Id){
-         GamePlayer gamePlayer = gamePlayerRepository
-                 .findById(gamePlayer_Id)
-                 .get();
-         return getGameViewDTO(gamePlayer.getGame(), gamePlayer);
-     }
+    public Map<String, Object> getGameView(@PathVariable Long gamePlayer_Id) {
+        GamePlayer gamePlayer = gamePlayerRepository
+                .findById(gamePlayer_Id)
+                .get();
+        return getGameViewDTO(gamePlayer.getGame(), gamePlayer);
+    }
 
-    public Map<String, Object> getGameViewDTO(Game game, GamePlayer gamePlayer){
+    public Map<String, Object> getGameViewDTO(Game game, GamePlayer gamePlayer) {
         Map<String, Object> dto = new LinkedHashMap<>();
         Set<Ship> ships = gamePlayer.getShips();
         Set<Salvo> salvos = gamePlayer.getSalvos();
@@ -98,31 +99,30 @@ public class SalvoController {
         return dto;
     }
 
-
     // Location Ships
-    public List<Map<String, Object>> getAllShips(Set<Ship> ships){
+    public List<Map<String, Object>> getAllShips(Set<Ship> ships) {
         return ships
                 .stream()
                 .map(ship -> shipDTO(ship))
-               .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
-     public Map<String, Object> shipDTO(Ship ship){
-       Map<String, Object> dto = new LinkedHashMap<>();
-          dto.put("type", ship.getType());
-          dto.put("locations", ship.getShipLocations());
+    public Map<String, Object> shipDTO(Ship ship) {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("type", ship.getType());
+        dto.put("locations", ship.getShipLocations());
         return dto;
     }
 
     //Location Salvos
     public List<Map<String, Object>> getAllSalvos(Set<Salvo> salvos) {
-          return salvos
-                  .stream()
-                  .map(salvo -> salvoDTO(salvo))
-                  .collect(Collectors.toList());
-}
+        return salvos
+                .stream()
+                .map(salvo -> salvoDTO(salvo))
+                .collect(Collectors.toList());
+    }
 
-    public Map<String, Object> salvoDTO(Salvo salvo){
+    public Map<String, Object> salvoDTO(Salvo salvo) {
         Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("turn", salvo.getTurn());
         dto.put("player", salvo.getGamePlayer().getPlayer().getId());
@@ -131,9 +131,8 @@ public class SalvoController {
     }
 
     //SCORE
-
     @RequestMapping("/leaderBoard")
-    public List<Map<String, Object>> getLeaderBoard(){
+    public List<Map<String, Object>> getLeaderBoard() {
         return playerRepository.findAll()
                 .stream()
                 .map(player -> playerLeaderBoardDto(player))
@@ -149,7 +148,7 @@ public class SalvoController {
     }
 
     public Map<String, Object> getPlayerScoreDTO(Player player) {
-    Map<String, Object> dto = new LinkedHashMap<>();
+        Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("total", player.getTotalScore());
         dto.put("won", player.getWinScore());
         dto.put("lost", player.getLostScore());
@@ -171,6 +170,5 @@ public class SalvoController {
         dto.put("finishDate", score.getFinishDate());
         return dto;
     }
-
 }
 

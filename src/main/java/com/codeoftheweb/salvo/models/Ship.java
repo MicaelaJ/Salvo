@@ -1,6 +1,7 @@
-package com.codeoftheweb.salvo.Models;
+package com.codeoftheweb.salvo.models;
 
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,11 +22,12 @@ public class Ship {
     private String type;
 
     @ElementCollection
-    @Column(name="shipLocations")
+    @Column(name = "shipLocations")
     private Set<String> shipLocations = new HashSet<>();
 
     //CONSTRUCTOR
-    public Ship() {}
+    public Ship() {
+    }
 
     public Ship(GamePlayer gamePlayer, String type, Set<String> shipLocations) {
         this.gamePlayer = gamePlayer;
@@ -39,16 +41,20 @@ public class Ship {
     }
 
     public String getType() {
-        return type;}
+        return type;
+    }
 
     public GamePlayer getGamePlayer() {
-        return gamePlayer;}
+        return gamePlayer;
+    }
 
     public GamePlayer getShipPlayer() {
-        return this.getGamePlayer();}
+        return this.getGamePlayer();
+    }
 
     public Set<String> getShipLocations() {
-        return shipLocations;}
+        return shipLocations;
+    }
 
     //SETTERS
     public void setType(String type) {

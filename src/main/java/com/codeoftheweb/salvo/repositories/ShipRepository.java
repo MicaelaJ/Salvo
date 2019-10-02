@@ -1,5 +1,5 @@
-package com.codeoftheweb.salvo.Repositories;
-import com.codeoftheweb.salvo.Models.Ship;
+package com.codeoftheweb.salvo.repositories;
+import com.codeoftheweb.salvo.models.Ship;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

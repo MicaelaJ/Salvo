@@ -1,5 +1,7 @@
-package com.codeoftheweb.salvo.Models;
+package com.codeoftheweb.salvo.models;
+
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,11 +22,12 @@ public class Salvo {
     private int turn;
 
     @ElementCollection
-    @Column(name="salvoLocations")
+    @Column(name = "salvoLocations")
     public Set<String> salvoLocations = new HashSet<>();
 
     //CONSTRUCTOR
-    public Salvo(){}
+    public Salvo() {
+    }
 
     public Salvo(int turn, GamePlayer gameplayer, Set<String> salvoLocations) {
         this.turn = turn;
@@ -34,16 +37,20 @@ public class Salvo {
 
     //GETTERS
     public long getId() {
-        return id; }
+        return id;
+    }
 
     public int getTurn() {
-        return turn;}
+        return turn;
+    }
 
     public GamePlayer getGamePlayer() {
-        return gamePlayer;}
+        return gamePlayer;
+    }
 
     public GamePlayer getSalvoPlayer() {
-        return this.getGamePlayer();}
+        return this.getGamePlayer();
+    }
 
     public Set<String> getSalvoLocations() {
         return salvoLocations;
@@ -55,11 +62,12 @@ public class Salvo {
     }
 
     public void setGamePlayer(GamePlayer gamePlayer) {
-            this.gamePlayer = gamePlayer;
-        }
+        this.gamePlayer = gamePlayer;
+    }
 
     public void SetSalvoLocations(Set<String> salvoLocations) {
-         this.salvoLocations = salvoLocations;}
+        this.salvoLocations = salvoLocations;
+    }
 
 
 }

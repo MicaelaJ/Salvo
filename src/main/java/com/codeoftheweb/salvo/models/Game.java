@@ -1,5 +1,7 @@
-package com.codeoftheweb.salvo.Models;
+package com.codeoftheweb.salvo.models;
+
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -25,23 +27,36 @@ public class Game {
     public Game() {
     }
 
-    public Game(Date creationDate) { this.creationDate = creationDate; }
+    //declaracion de metodo
+    public Game(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
     //GETTERS
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
-    public Date getCreationDate() { return creationDate; }
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-    public Double getScore() { return score; }
+    public Double getScore() {
+        return score;
+    }
 
     //SETTERS
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
 
-    public void setScores() { this.scores = scores; }
+    public void setScores() {
+        this.scores = scores;
+    }
 
-    public Set<Score> getScores() { return scores; }
+    public Set<Score> getScores() {
+        return scores;
+    }
 }
 
 

@@ -1,5 +1,7 @@
-package com.codeoftheweb.salvo.Models;
+package com.codeoftheweb.salvo.models;
+
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,24 +15,31 @@ public class Player {
     private long id;
 
     private String userName;
+    private String password;
 
-    @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
 
     @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
     Set<Score> scores;
 
     //CONSTRUCTOR
-    public Player() {}
-    public Player(String userName) {
-        this.userName = userName; }
+    public Player() {
+    }
+
+    public Player(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 
     //GETTERS
     public long getId() {
-        return id; }
+        return id;
+    }
 
     public String getUserName() {
-        return userName; }
+        return userName;
+    }
 
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
@@ -40,29 +49,41 @@ public class Player {
         return (Set<Score>) scores;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     //SETTERS
     public void setScores() {
         this.scores = scores;
     }
 
-  // win 1 tied 0.5 lost 0
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // win 1 tied 0.5 lost 0
     public long getWinScore() {
         return this.getScores().stream()
-            .filter(score -> score.getScore() == 1.0D)
-            .count(); }
+                .filter(score -> score.getScore() == 1.0D)
+                .count();
+    }
 
     public double getTiedScore() {
         return this.getScores().stream()
-            .filter(score -> score.getScore() == 0.5D)
-            .count(); }
+                .filter(score -> score.getScore() == 0.5D)
+                .count();
+    }
 
     public long getLostScore() {
         return this.getScores().stream()
                 .filter(score -> score.getScore() == 0D)
-                .count(); }
+                .count();
+    }
 
     public double getTotalScore() {
-        return this.getWinScore() + this.getTiedScore() * 0.5; }
+        return this.getWinScore() + this.getTiedScore() * 0.5;
+    }
 }
 
 

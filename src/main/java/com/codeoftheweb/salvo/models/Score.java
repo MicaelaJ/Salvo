@@ -1,5 +1,7 @@
-package com.codeoftheweb.salvo.Models;
+package com.codeoftheweb.salvo.models;
+
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -24,9 +26,10 @@ public class Score {
     private Player player;
 
     //CONSTRUCTOR
-    public Score(){}
+    public Score() {
+    }
 
-    public Score(Game game, Player player, double score, Date finishDate){
+    public Score(Game game, Player player, double score, Date finishDate) {
         this.game = game;
         this.player = player;
         this.score = score;
@@ -34,22 +37,36 @@ public class Score {
     }
 
     //GETTERS
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
-    public double getScore() { return score; }
+    public double getScore() {
+        return score;
+    }
 
-    public Date getFinishDate() {return finishDate;}
+    public Date getFinishDate() {
+        return finishDate;
+    }
 
-    public Game getGame(){
+    public Game getGame() {
         return game;
     }
 
-    public Player getPlayer() { return player; }
+    public Player getPlayer() {
+        return player;
+    }
 
     //SETTERS
-    public void setScore(float score) { this.score = score; }
+    public void setScore(float score) {
+        this.score = score;
+    }
 
-    public void setGame(Game game) { this.game = game; }
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
-    public void setFinishDate(Date finishDate) { this.finishDate = finishDate; }
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
+    }
 }
