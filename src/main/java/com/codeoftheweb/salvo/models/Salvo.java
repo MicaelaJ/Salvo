@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -24,6 +26,15 @@ public class Salvo {
     @ElementCollection
     @Column(name = "salvoLocations")
     public Set<String> salvoLocations = new HashSet<>();
+
+
+    public Map<String, Object> salvoDTO() {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("turn", this.getTurn());
+        dto.put("player", this.getGamePlayer().getPlayer().getId());
+        dto.put("locations", this.getSalvoLocations());
+        return dto;
+    }
 
     //CONSTRUCTOR
     public Salvo() {

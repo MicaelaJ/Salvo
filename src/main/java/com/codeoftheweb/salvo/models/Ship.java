@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -24,6 +26,13 @@ public class Ship {
     @ElementCollection
     @Column(name = "shipLocations")
     private Set<String> shipLocations = new HashSet<>();
+
+    public Map<String, Object> shipDTO() {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("type", this.getType());
+        dto.put("locations", this.getShipLocations());
+        return dto;
+    }
 
     //CONSTRUCTOR
     public Ship() {

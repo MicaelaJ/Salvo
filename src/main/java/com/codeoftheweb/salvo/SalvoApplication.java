@@ -186,8 +186,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                //recursos estaticos estan liberados
                 .antMatchers("/web/**").permitAll()
-                .antMatchers("/**").hasAuthority("USER");
+                .antMatchers("/api/game_view/**").hasAuthority("USER")
+                .antMatchers("/api/games").permitAll()
+                .antMatchers("/api/leadBoard").permitAll();
 
         http.formLogin()
                 .usernameParameter("name")
